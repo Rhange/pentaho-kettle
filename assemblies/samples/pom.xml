@@ -53,18 +53,20 @@
           <password>${sample.db.password}</password>
         </configuration>
         <executions>
-          <execution>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>execute</goal>
-            </goals>
-            <configuration>
-              <srcFiles>
-                <srcFile>src/main/resources/db/backup.sql</srcFile>
-              </srcFiles>
-              <forceMojoExecution>true</forceMojoExecution>
-            </configuration>
-          </execution>
+          <!-- 에러 -->
+          <!--Cannot parse timestamp constant "1961-08-10 00:00:00.0", cause: "java.lang.IllegalArgumentException: MINUTE: 0 -> 30";-->
+          <!--          <execution>-->
+          <!--            <phase>process-resources</phase>-->
+          <!--            <goals>-->
+          <!--              <goal>execute</goal>-->
+          <!--            </goals>-->
+          <!--            <configuration>-->
+          <!--              <srcFiles>-->
+          <!--                <srcFile>src/main/resources/db/backup.sql</srcFile>-->
+          <!--              </srcFiles>-->
+          <!--              <forceMojoExecution>true</forceMojoExecution>-->
+          <!--            </configuration>-->
+          <!--          </execution>-->
         </executions>
         <dependencies>
           <dependency>
