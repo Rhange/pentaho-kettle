@@ -1,4 +1,4 @@
-FROM tomcat:jdk8
+FROM tomcat:9-jdk8
 MAINTAINER Hiromu Hota <hiromu.hota@hal.hitachi.com>
 ENV JAVA_OPTS="-Xms1024m -Xmx2048m"
 RUN echo "root:password" | chpasswd
