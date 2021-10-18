@@ -9,7 +9,6 @@ RUN rm -rf ${CATALINA_HOME}/webapps/* \
     && mkdir ${CATALINA_HOME}/webapps/ROOT \
     && echo "<% response.sendRedirect(\"spoon/\"); %>" > ${CATALINA_HOME}/webapps/ROOT/index.jsp
 
-
 ARG base=9.0
 ARG patch=22
 ARG version=0.$base.$patch
@@ -22,7 +21,7 @@ USER tomcat
 
 ARG CACHEBUST=1
 
-COPY --chown=tomcat:tomcat target/tomcat ${CATALINA_HOME}
+COPY --chown=tomcat:tomcat target/tomcat/ ${CATALINA_HOME}/
 
 RUN echo "org.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true" | tee -a conf/catalina.properties
 COPY --chown=tomcat:tomcat install.sh /tmp/install.sh

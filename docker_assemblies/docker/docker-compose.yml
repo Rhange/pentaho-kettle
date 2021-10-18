@@ -1,7 +1,7 @@
 version: '3'
 services:
   webspoon:
-    image: hiromuhota/webspoon
+    image: rhange0511/webspoon:v1
     ports:
       - "8080:8080"
     volumes:
