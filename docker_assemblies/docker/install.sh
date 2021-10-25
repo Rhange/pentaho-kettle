@@ -7,3 +7,5 @@ if [ -z ${CATALINA_HOME} ]; then echo "CATALINA_HOME is unset" && exit 1; fi
 echo 'Configuring org.pentaho.requirejs.cfg'
 echo 'context.root=/spoon/osgi' | tee ${CATALINA_HOME}/system/karaf/etc/org.pentaho.requirejs.cfg
 
+echo 'Removing Karaf cache'
+rm -rf ${CATALINA_HOME}/system/karaf/caches/webspoonservletcontextlistener || true

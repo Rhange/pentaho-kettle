@@ -1,5 +1,4 @@
 FROM tomcat:9-jdk8
-MAINTAINER Hiromu Hota <hiromu.hota@hal.hitachi.com>
 ENV JAVA_OPTS="-Xms1024m -Xmx2048m"
 RUN echo "root:password" | chpasswd
 RUN apt-get update && apt-get install -y vim
@@ -22,15 +21,15 @@ USER tomcat
 ARG CACHEBUST=1
 
 COPY --chown=tomcat:tomcat target/tomcat/ ${CATALINA_HOME}/
+RUN rm -rf $CATALINA_HOME/webapps/spoon/plugins
+
+COPY --chown=tomcat:tomcat simple-jndi/ ${CATALINA_HOME}/
+COPY --chown=tomcat:tomcat system/ ${CATALINA_HOME}/
 
 RUN echo "org.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true" | tee -a conf/catalina.properties
 COPY --chown=tomcat:tomcat install.sh /tmp/install.sh
 RUN sh /tmp/install.sh
 
-RUN echo "CLASSPATH="$CATALINA_HOME"/lib/webspoon-security-$dist.jar" | tee ${CATALINA_HOME}/bin/setenv.sh
+RUN echo "CLASSPATH="$CATALINA_HOME"/lib/webspoon-security-9.2.0.0-SNAPSHOT.jar" | tee ${CATALINA_HOME}/bin/setenv.sh
 RUN mkdir -p $HOME/.kettle/users && mkdir -p $HOME/.pentaho/users
 RUN mkdir -p $HOME/.kettle/data && cp -r ${CATALINA_HOME}/samples $HOME/.kettle/data/samples
-
-COPY --chown=tomcat:tomcat customScripts/* ./bin/
-
-ENTRYPOINT ["/bin/sh","./bin/start.sh"]
